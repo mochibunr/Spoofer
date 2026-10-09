@@ -1,35 +1,35 @@
-# Xiaomi 18 Pro Max (China)
-# Model: M154FF
-# Codename: madrid
+# Xiaomi 18 Fold (China)
+# Model: 2608BPX34C
+# Codename: lhasa
 # Source: KHwang9883/MobileModels brands/xiaomi_cn.md
 
 ro.product.manufacturer=Xiaomi
 ro.product.brand=Xiaomi
-ro.product.model=Xiaomi 18 Pro Max
-ro.product.name=madrid
-ro.product.device=madrid
-ro.build.product=madrid
+ro.product.model=Xiaomi 18 Fold
+ro.product.name=lhasa
+ro.product.device=lhasa
+ro.build.product=lhasa
 ro.product.product.manufacturer=Xiaomi
 ro.product.product.brand=Xiaomi
-ro.product.product.model=Xiaomi 18 Pro Max
-ro.product.product.name=madrid
-ro.product.product.device=madrid
+ro.product.product.model=Xiaomi 18 Fold
+ro.product.product.name=lhasa
+ro.product.product.device=lhasa
 ro.product.system.manufacturer=Xiaomi
 ro.product.system.brand=Xiaomi
-ro.product.system.model=Xiaomi 18 Pro Max
-ro.product.system.name=madrid
-ro.product.system.device=madrid
+ro.product.system.model=Xiaomi 18 Fold
+ro.product.system.name=lhasa
+ro.product.system.device=lhasa
 ro.product.system_ext.manufacturer=Xiaomi
 ro.product.system_ext.brand=Xiaomi
-ro.product.system_ext.model=Xiaomi 18 Pro Max
-ro.product.system_ext.name=madrid
-ro.product.system_ext.device=madrid
+ro.product.system_ext.model=Xiaomi 18 Fold
+ro.product.system_ext.name=lhasa
+ro.product.system_ext.device=lhasa
 ro.product.vendor.manufacturer=Xiaomi
 ro.product.vendor.brand=Xiaomi
-ro.product.vendor.model=Xiaomi 18 Pro Max
+ro.product.vendor.model=Xiaomi 18 Fold
 ro.product.odm.manufacturer=Xiaomi
 ro.product.odm.brand=Xiaomi
-ro.product.odm.model=Xiaomi 18 Pro Max
+ro.product.odm.model=Xiaomi 18 Fold
 
 # Intentionally do not spoof build fingerprint or SoC:
-# no verified Xiaomi 18 Pro Max fingerprint/build.prop was available in the model list.
+# the model list does not provide a verified Xiaomi 18 Fold firmware fingerprint.
