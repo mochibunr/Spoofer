@@ -1,43 +1,55 @@
-# Xiaomi 18 Pro Max (China)
-# Model: M154FF
-# Codename: madrid
-# SoC identifier: Qualcomm SM8975 (reported by pre-release benchmark/specification sources)
-# Source: KHwang9883/MobileModels brands/xiaomi_cn.md; SoC identity is not an official firmware build.prop.
+# iPhone 17 Pro Max (Rest of world)
+# Model number: A3526
+# Apple hardware identifier: iPhone18,2
+# Chip: Apple A19 Pro (reported identity only)
+# Reference: Apple Support model identification and technical specifications.
+#
+# IMPORTANT:
+# This is an Android property profile, not an iOS port.
+# Keep ro.board.platform unchanged: Android kernel/modules depend on the real MT6768 platform.
 
-ro.product.manufacturer=Xiaomi
-ro.product.brand=Xiaomi
-ro.product.model=Xiaomi 18 Pro Max
-ro.product.name=madrid
-ro.product.device=madrid
-ro.build.product=madrid
-ro.product.product.manufacturer=Xiaomi
-ro.product.product.brand=Xiaomi
-ro.product.product.model=Xiaomi 18 Pro Max
-ro.product.product.name=madrid
-ro.product.product.device=madrid
-ro.product.system.manufacturer=Xiaomi
-ro.product.system.brand=Xiaomi
-ro.product.system.model=Xiaomi 18 Pro Max
-ro.product.system.name=madrid
-ro.product.system.device=madrid
-ro.product.system_ext.manufacturer=Xiaomi
-ro.product.system_ext.brand=Xiaomi
-ro.product.system_ext.model=Xiaomi 18 Pro Max
-ro.product.system_ext.name=madrid
-ro.product.system_ext.device=madrid
-ro.product.vendor.manufacturer=Xiaomi
-ro.product.vendor.brand=Xiaomi
-ro.product.vendor.model=Xiaomi 18 Pro Max
-ro.product.odm.manufacturer=Xiaomi
-ro.product.odm.brand=Xiaomi
-ro.product.odm.model=Xiaomi 18 Pro Max
+ro.product.manufacturer=Apple
+ro.product.brand=Apple
+ro.product.model=iPhone 17 Pro Max
+ro.product.name=iPhone18,2
+ro.product.device=iPhone18,2
+ro.build.product=iPhone18,2
 
-# Reported chipset identity only; this does not change physical hardware.
-ro.soc.manufacturer=Qualcomm
-ro.soc.model=SM8975
-ro.vendor.soc.manufacturer=Qualcomm
-ro.vendor.soc.model=SM8975
-ro.board.platform=SM8975
+ro.product.product.manufacturer=Apple
+ro.product.product.brand=Apple
+ro.product.product.model=iPhone 17 Pro Max
+ro.product.product.name=iPhone18,2
+ro.product.product.device=iPhone18,2
 
-# Intentionally do not spoof build fingerprint:
-# no verified Xiaomi 18 Pro Max firmware fingerprint/build.prop was available.
+ro.product.system.manufacturer=Apple
+ro.product.system.brand=Apple
+ro.product.system.model=iPhone 17 Pro Max
+ro.product.system.name=iPhone18,2
+ro.product.system.device=iPhone18,2
+
+ro.product.system_ext.manufacturer=Apple
+ro.product.system_ext.brand=Apple
+ro.product.system_ext.model=iPhone 17 Pro Max
+ro.product.system_ext.name=iPhone18,2
+ro.product.system_ext.device=iPhone18,2
+
+ro.product.vendor.manufacturer=Apple
+ro.product.vendor.brand=Apple
+ro.product.vendor.model=iPhone 17 Pro Max
+ro.product.vendor.name=iPhone18,2
+ro.product.vendor.device=iPhone18,2
+
+ro.product.odm.manufacturer=Apple
+ro.product.odm.brand=Apple
+ro.product.odm.model=iPhone 17 Pro Max
+ro.product.odm.name=iPhone18,2
+ro.product.odm.device=iPhone18,2
+
+# Reported SoC identity only. This does not change the physical MediaTek hardware.
+ro.soc.manufacturer=Apple
+ro.soc.model=A19 Pro
+ro.vendor.soc.manufacturer=Apple
+ro.vendor.soc.model=A19 Pro
+
+# Intentionally preserve ro.board.platform and all build fingerprints:
+# Android kernel/platform and ROM fingerprints must not be fabricated as iOS.
