@@ -33,7 +33,10 @@ jobs:
           : "${ANDROID_HOME:?ANDROID_HOME is not set on this runner}"
           SDKMANAGER="$(find "$ANDROID_HOME/cmdline-tools" -type f -path '*/bin/sdkmanager' | sort -V | tail -n1)"
           test -n "$SDKMANAGER"
+          # sdkmanager can exit before 'yes' closes its pipe when licenses are already accepted.
+          set +o pipefail
           yes | "$SDKMANAGER" --licenses >/dev/null
+          set -o pipefail
           "$SDKMANAGER" --install "ndk;27.2.12479018"
       - name: Verify NDK installation
         run: |
