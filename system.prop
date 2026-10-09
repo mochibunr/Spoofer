@@ -1,0 +1,7 @@
+# Device Info
+ro.product.manufacturer=Xiaomi
+ro.product.product.manufacturer=Xiaomi
+
+# CPU & GPU Info
+ro.soc.manufacturer=Qualcomm
+ro.soc.model=SM875050
