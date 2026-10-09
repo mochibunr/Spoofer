@@ -1,3 +1,47 @@
-# One Android package name per line. Only these apps receive the iPhone identity.
-# Add other package names below; restart those apps after changing this file.
+# One Android package name per line.
+# Only listed apps receive the app-visible iPhone identity.
+# Remove any package you do not want to target. Restart an app after changes.
+
+# Games
 com.mobile.legends
+
+# Social and messaging
+com.instagram.android
+com.whatsapp
+com.snapchat.android
+jp.naver.line.android
+com.facebook.katana
+com.facebook.orca
+com.facebook.lite
+com.zhiliaoapp.musically
+com.ss.android.ugc.trill
+org.telegram.messenger
+com.discord
+com.reddit.frontpage
+com.twitter.android
+
+# Google apps
+com.google.android.youtube
+com.google.android.youtube.music
+com.android.chrome
+com.google.android.googlequicksearchbox
+com.google.android.gm
+com.google.android.apps.photos
+com.google.android.apps.maps
+com.google.android.apps.docs
+com.google.android.apps.drive
+com.google.android.calendar
+com.google.android.contacts
+com.google.android.apps.messaging
+com.google.android.keep
+com.google.android.apps.tachyon
+com.google.android.apps.meetings
+com.google.android.play.games
+com.android.vending
+
+# Media and everyday apps
+com.spotify.music
+com.netflix.mediaclient
+com.amazon.mShop.android.shopping
+com.microsoft.office.outlook
+com.microsoft.teams
