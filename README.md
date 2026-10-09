@@ -27,6 +27,26 @@ A KernelSU/Magisk-style Android module profile that reports selected Android pro
 
 Expected spoofed values include `Apple`, `iPhone 17 Pro Max`, `iPhone18,2`, and `A19 Pro`. `ro.board.platform` is intentionally left as the real Android platform.
 
+## Mobile Legends: Bang Bang — Effect Quality
+
+The current profile changes global Android product/SoC identity strings only. It does **not** contain a verified MLBB-specific Effect Quality unlock. MLBB's available graphics tiers can depend on game-version/device compatibility checks, and advertising an iPhone identity to an Android game does not make the game see an actual iPhone GPU or iOS device.
+
+Do not add guessed GPU, chipset, Android-version, or graphics properties globally: the Redmi 9's actual MT6768 platform and graphics stack must remain intact. Community unlock claims are not enough to establish which preference key or device check controls the missing **Effect Quality: Ultra** option in your installed game version.
+
+A read-only diagnostic helper, `mlbb-diagnose.sh`, is included in this repository. It only searches the MLBB player-preferences XML for relevant graphics/quality preference names and values; it does not change files or properties.
+
+To run it on the phone:
+1. Download `mlbb-diagnose.sh` from this repository.
+2. Place it somewhere accessible, such as `/sdcard/Download/mlbb-diagnose.sh`.
+3. Run it from a root shell:
+   ```sh
+   su
+   sh /sdcard/Download/mlbb-diagnose.sh
+   ```
+4. Open MLBB at least once first. If the preference file is found, share the matching output (remove any personal identifiers if present). This gives us evidence for the installed game version before attempting any reversible setting change.
+
+The helper is diagnostic only. It does not promise to unlock Ultra by itself.
+
 ## Important limitations
 
 - **This is not an iOS emulator or a full iPhone spoof.** Android apps still run on Android 13 / SDK 33, and Android APIs, framework behavior, kernel interfaces, and app environment remain Android.
