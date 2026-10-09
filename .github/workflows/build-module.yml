@@ -26,9 +26,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: android-actions/setup-android@v3
-      - name: Install Android NDK
-        run: sdkmanager "ndk;27.2.12479018"
+      - name: Set up Android SDK and install NDK
+        uses: android-actions/setup-android@v3
+        with:
+          cmdline-tools-version: 12266719
+          packages: |
+            ndk;27.2.12479018
+      - name: Verify NDK installation
+        run: |
+          test -x "$ANDROID_HOME/ndk/27.2.12479018/ndk-build"
+          "$ANDROID_HOME/ndk/27.2.12479018/ndk-build" --version
       - name: Compile Zygisk library
         run: |
           "$ANDROID_HOME/ndk/27.2.12479018/ndk-build" \
@@ -38,7 +45,7 @@ jobs:
             NDK_APPLICATION_MK=jni/Application.mk
       - name: Assemble installable module ZIP
         run: |
-          set -e
+          set -euo pipefail
           mkdir -p dist/Spoofing/zygisk
           cp module.prop system.prop target_apps.txt dist/Spoofing/
           cp module/libs/arm64-v8a/libspoof.so dist/Spoofing/zygisk/arm64-v8a.so
