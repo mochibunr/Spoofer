@@ -8,6 +8,7 @@ ro.product.brand=Xiaomi
 ro.product.model=Xiaomi 18 Pro Max
 ro.product.name=madrid
 ro.product.device=madrid
+ro.build.product=madrid
 ro.product.product.manufacturer=Xiaomi
 ro.product.product.brand=Xiaomi
 ro.product.product.model=Xiaomi 18 Pro Max
