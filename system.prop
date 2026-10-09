@@ -1,7 +1,8 @@
 # Xiaomi 18 Pro Max (China)
 # Model: M154FF
 # Codename: madrid
-# Source: KHwang9883/MobileModels brands/xiaomi_cn.md
+# SoC identifier: Qualcomm SM8975 (reported by pre-release benchmark/specification sources)
+# Source: KHwang9883/MobileModels brands/xiaomi_cn.md; SoC identity is not an official firmware build.prop.
 
 ro.product.manufacturer=Xiaomi
 ro.product.brand=Xiaomi
@@ -31,5 +32,12 @@ ro.product.odm.manufacturer=Xiaomi
 ro.product.odm.brand=Xiaomi
 ro.product.odm.model=Xiaomi 18 Pro Max
 
-# Intentionally do not spoof build fingerprint or SoC:
-# no verified Xiaomi 18 Pro Max fingerprint/build.prop was available in the model list.
+# Reported chipset identity only; this does not change physical hardware.
+ro.soc.manufacturer=Qualcomm
+ro.soc.model=SM8975
+ro.vendor.soc.manufacturer=Qualcomm
+ro.vendor.soc.model=SM8975
+ro.board.platform=SM8975
+
+# Intentionally do not spoof build fingerprint:
+# no verified Xiaomi 18 Pro Max firmware fingerprint/build.prop was available.
