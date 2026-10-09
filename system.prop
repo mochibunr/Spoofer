@@ -1,7 +1,34 @@
-# Device Info
-ro.product.manufacturer=Xiaomi
-ro.product.product.manufacturer=Xiaomi
+# Xiaomi 18 Pro Max (China)
+# Model: M154FF
+# Codename: madrid
+# Source: KHwang9883/MobileModels brands/xiaomi_cn.md
 
-# CPU & GPU Info
-ro.soc.manufacturer=Qualcomm
-ro.soc.model=SM875050
+ro.product.manufacturer=Xiaomi
+ro.product.brand=Xiaomi
+ro.product.model=Xiaomi 18 Pro Max
+ro.product.name=madrid
+ro.product.device=madrid
+ro.product.product.manufacturer=Xiaomi
+ro.product.product.brand=Xiaomi
+ro.product.product.model=Xiaomi 18 Pro Max
+ro.product.product.name=madrid
+ro.product.product.device=madrid
+ro.product.system.manufacturer=Xiaomi
+ro.product.system.brand=Xiaomi
+ro.product.system.model=Xiaomi 18 Pro Max
+ro.product.system.name=madrid
+ro.product.system.device=madrid
+ro.product.system_ext.manufacturer=Xiaomi
+ro.product.system_ext.brand=Xiaomi
+ro.product.system_ext.model=Xiaomi 18 Pro Max
+ro.product.system_ext.name=madrid
+ro.product.system_ext.device=madrid
+ro.product.vendor.manufacturer=Xiaomi
+ro.product.vendor.brand=Xiaomi
+ro.product.vendor.model=Xiaomi 18 Pro Max
+ro.product.odm.manufacturer=Xiaomi
+ro.product.odm.brand=Xiaomi
+ro.product.odm.model=Xiaomi 18 Pro Max
+
+# Intentionally do not spoof build fingerprint or SoC:
+# no verified Xiaomi 18 Pro Max fingerprint/build.prop was available in the model list.
