@@ -27,25 +27,27 @@ A KernelSU/Magisk-style Android module profile that reports selected Android pro
 
 Expected spoofed values include `Apple`, `iPhone 17 Pro Max`, `iPhone18,2`, and `A19 Pro`. `ro.board.platform` is intentionally left as the real Android platform.
 
-## Mobile Legends: Bang Bang — Effect Quality
+## Mobile Legends: Bang Bang — loading optimization
 
-The current profile changes global Android product/SoC identity strings only. It does **not** contain a verified MLBB-specific Effect Quality unlock. MLBB's available graphics tiers can depend on game-version/device compatibility checks, and advertising an iPhone identity to an Android game does not make the game see an actual iPhone GPU or iOS device.
+The spoof profile does not control MLBB's Unity resource-loading pipeline. Do not add guessed graphics, GPU, chipset, Android-version, or game-preference changes: the Redmi 9's real MT6768 platform, graphics stack, FPS settings, and spoofed identity must remain intact.
 
-Do not add guessed GPU, chipset, Android-version, or graphics properties globally: the Redmi 9's actual MT6768 platform and graphics stack must remain intact. Community unlock claims are not enough to establish which preference key or device check controls the missing **Effect Quality: Ultra** option in your installed game version.
+This repository includes `mlbb-art-compile.sh`, an **optional one-shot** Android Runtime (ART) compilation helper. It asks Android to compile MLBB's managed bytecode using the `speed-profile` mode. This is a low-impact, reversible optimization attempt for managed Java/Kotlin startup work; MLBB's Unity/IL2CPP code and asset loading may dominate the pre-lobby progress screen, so this is **not guaranteed to shorten loading time**.
 
-A read-only diagnostic helper, `mlbb-diagnose.sh`, is included in this repository. It only searches the MLBB player-preferences XML for relevant graphics/quality preference names and values; it does not change files or properties.
+Run it once from the phone's root shell after copying the script to the device:
+```sh
+su
+sh /sdcard/Download/mlbb-art-compile.sh
+```
 
-To run it on the phone:
-1. Download `mlbb-diagnose.sh` from this repository.
-2. Place it somewhere accessible, such as `/sdcard/Download/mlbb-diagnose.sh`.
-3. Run it from a root shell:
-   ```sh
-   su
-   sh /sdcard/Download/mlbb-diagnose.sh
-   ```
-4. Open MLBB at least once first. If the preference file is found, share the matching output (remove any personal identifiers if present). This gives us evidence for the installed game version before attempting any reversible setting change.
+To reset the ART compilation state:
+```sh
+su
+sh /sdcard/Download/mlbb-art-compile.sh --reset
+```
 
-The helper is diagnostic only. It does not promise to unlock Ultra by itself.
+The helper does not edit MLBB preferences, clear resource caches, change FPS or graphics settings, modify Android properties, or run automatically at boot. It may use CPU and storage while compiling, so let it finish before launching MLBB. Compare the next launch with your usual loading time; if there is no measurable improvement, the likely bottleneck is outside ART-managed startup and this helper should not be treated as a fix for Unity asset loading.
+
+A read-only diagnostic helper, `mlbb-diagnose.sh`, is also included in this repository. It only searches the MLBB player-preferences XML for relevant graphics/quality preference names and values; it does not change files or properties.
 
 ## Important limitations
 
