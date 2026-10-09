@@ -1,6 +1,6 @@
 id=Spoofing
 name=Fake Devices - Xiaomi 18 Pro Max (CN)
-version=2.2.0
-versionCode=20261009
+version=2.3.0
+versionCode=20261010
 author=Zhameng
-description=Spoofs common Android product identity properties as Xiaomi 18 Pro Max (CN, M154FF).
+description=Spoofs common Android product and reported SoC properties as Xiaomi 18 Pro Max (CN, M154FF).
