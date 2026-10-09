@@ -1,63 +1,47 @@
-# iPhone 17 Pro Max (A3526) Android Property Spoof
+# Spoofer — selective iPhone 17 Pro Max identity for Android apps
 
-A KernelSU/Magisk-style Android module profile that reports selected Android product identity and SoC properties as **iPhone 17 Pro Max (rest of world)**.
+Spoofer uses a **per-app Zygisk module** to make selected Android apps see common device identity fields as an iPhone 17 Pro Max, without changing those properties globally.
 
-## Target identity
+## What it changes
 
-- Apple model number: `A3526` (rest of world)
-- Apple hardware identifier: `iPhone18,2`
-- Reported chip: Apple `A19 Pro`
-- Official model identification: [Apple Support — Identify your iPhone model](https://support.apple.com/id-id/108044)
-- Official specifications: [Apple Support — iPhone 17 Pro Max technical specifications](https://support.apple.com/id-id/125091)
+For packages listed in `target_apps.txt`, it overrides common Java `android.os.Build` identity fields and the matching Java `android.os.SystemProperties` reads:
 
-## Install
+- Manufacturer / brand: `Apple`
+- Model: `iPhone 17 Pro Max`
+- Device / product: `iPhone18,2`
+- App-visible SoC identity: `Apple A19 Pro`
 
-1. Build/download a ZIP containing `module.prop` and `system.prop` at the ZIP root, plus the compatible installer files if your module package uses them.
-2. Install the ZIP through KernelSU Next or a compatible module manager.
-3. Reboot.
-4. Verify the reported properties:
-   ```sh
-   getprop ro.product.manufacturer
-   getprop ro.product.model
-   getprop ro.product.device
-   getprop ro.soc.manufacturer
-   getprop ro.soc.model
-   getprop ro.board.platform
-   ```
+The module deliberately does **not** change `ro.board.platform`, `ro.hardware`, Android release/SDK, GPU capabilities, or the Android build fingerprint. The physical device remains a Redmi 9 running Android; this is selective identity spoofing, not iOS emulation.
 
-Expected spoofed values include `Apple`, `iPhone 17 Pro Max`, `iPhone18,2`, and `A19 Pro`. `ro.board.platform` is intentionally left as the real Android platform.
+## Choose which apps are targeted
 
-## Mobile Legends: Bang Bang — loading optimization
+Edit `target_apps.txt`, one Android package name per line. Lines beginning with `#` are comments. The initial list targets MLBB:
 
-The spoof profile does not control MLBB's Unity resource-loading pipeline. Do not add guessed graphics, GPU, chipset, Android-version, or game-preference changes: the Redmi 9's real MT6768 platform, graphics stack, FPS settings, and spoofed identity must remain intact.
-
-This repository includes `mlbb-art-compile.sh`, an **optional one-shot** Android Runtime (ART) compilation helper. It asks Android to compile MLBB's managed bytecode using the `speed-profile` mode. This is a low-impact, reversible optimization attempt for managed Java/Kotlin startup work; MLBB's Unity/IL2CPP code and asset loading may dominate the pre-lobby progress screen, so this is **not guaranteed to shorten loading time**.
-
-Run it once from the phone's root shell after copying the script to the device:
-```sh
-su
-sh /sdcard/Download/mlbb-art-compile.sh
+```text
+com.mobile.legends
 ```
 
-To reset the ART compilation state:
-```sh
-su
-sh /sdcard/Download/mlbb-art-compile.sh --reset
-```
+Add other package names to target them too. You can find a package name in the app's store URL, with a package inspector, or using `pm list packages` from a root shell. After changing the list, force-stop and relaunch the target app. The Zygisk module reads the list when each app process starts.
 
-The helper does not edit MLBB preferences, clear resource caches, change FPS or graphics settings, modify Android properties, or run automatically at boot. It may use CPU and storage while compiling, so let it finish before launching MLBB. Compare the next launch with your usual loading time; if there is no measurable improvement, the likely bottleneck is outside ART-managed startup and this helper should not be treated as a fix for Unity asset loading.
+Apps not listed should see the real global Android identity. Zygisk support must be enabled in a compatible runtime such as Zygisk Next for KernelSU Next. This module includes an ARM64 build target for the Redmi 9.
 
-A read-only diagnostic helper, `mlbb-diagnose.sh`, is also included in this repository. It only searches the MLBB player-preferences XML for relevant graphics/quality preference names and values; it does not change files or properties.
+## Important limits
 
-## Important limitations
+- Per-app hooks cover common Java `Build` fields and Java `SystemProperties` reads. They do not intercept every native property API, hardware-backed attestation, Play Integrity, sensors, GPU queries, installed OS/framework checks, or server-side device checks.
+- Apps may still correctly recognize that they are running on Android. Android apps cannot be made into iOS apps, and spoofed identity strings cannot provide iOS-only APIs.
+- Some fields may be cached or inlined by an app, and Android releases can change internal native method names. The module logs whether its SystemProperties hooks were found; Build field overrides are attempted independently.
+- This is not a guarantee that every target app will accept the reported identity. Do not use it to bypass account restrictions, fraud controls, or security checks.
 
-- **This is not an iOS emulator or a full iPhone spoof.** Android apps still run on Android 13 / SDK 33, and Android APIs, framework behavior, kernel interfaces, and app environment remain Android.
-- This changes selected reported properties only. It does not change the physical MediaTek MT6768 chipset, GPU, cameras, modem, display, battery, sensors, or other hardware capabilities.
-- `A3526` is the regional Apple model number; `iPhone18,2` is the internal iPhone 17 Pro Max hardware identifier listed by device-model references. Android property spoofing cannot make iOS-only apps run or make Apple services treat the phone as a genuine iPhone.
-- The module deliberately leaves `ro.board.platform`, Android release/SDK values, and build fingerprints untouched. Falsifying those can break Android components or create contradictory build information.
-- Apps can inspect hardware-backed attestation, Play Integrity, installed OS/framework, kernel interfaces, sensors, and other signals. This module cannot guarantee that apps will accept the reported identity.
-- Product-property changes may cause incompatibilities with ROM components or other modules. If anything misbehaves, disable the module from KernelSU Next or safe mode.
+## Install / build
 
-## Packaging note
+The CI workflow builds `module/jni/main.cpp` with the Android NDK and packages an installable ZIP as a GitHub Actions artifact. Install the ZIP through KernelSU Next after confirming that a Zygisk-compatible runtime is installed and enabled. Keep a recovery path available before testing any root module.
 
-Do not ZIP the repository's `.git/` directory. The module files should be at the archive root, not nested inside a repository folder.
+The source project uses the public Zygisk API header from the Zygisk module sample project.
+
+## Optional MLBB ART compilation helper
+
+`mlbb-art-compile.sh` is a separate, opt-in helper that requests ART `speed-profile` compilation for MLBB. It does not change graphics preferences, FPS settings, or identity properties, and it is not guaranteed to speed up Unity asset loading. It is not run automatically.
+
+## Real platform safety
+
+The global `system.prop` intentionally contains no spoofed values. In particular, `ro.board.platform=mt6768`, `ro.hardware`, Android version/SDK, GPU and kernel properties remain real system values. The iPhone identity is applied only inside configured target app processes.
