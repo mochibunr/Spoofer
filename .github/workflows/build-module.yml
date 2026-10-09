@@ -1,0 +1,52 @@
+name: Build per-app Spoofer module
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, "fix/mlbb-startup-art-compile"]
+    paths:
+      - "module/**"
+      - "module.prop"
+      - "system.prop"
+      - "target_apps.txt"
+      - ".github/workflows/build-module.yml"
+  pull_request:
+    paths:
+      - "module/**"
+      - "module.prop"
+      - "system.prop"
+      - "target_apps.txt"
+      - ".github/workflows/build-module.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: android-actions/setup-android@v3
+      - name: Install Android NDK
+        run: sdkmanager "ndk;27.2.12479018"
+      - name: Compile Zygisk library
+        run: |
+          "$ANDROID_HOME/ndk/27.2.12479018/ndk-build" \
+            -C module \
+            NDK_PROJECT_PATH=. \
+            APP_BUILD_SCRIPT=jni/Android.mk \
+            NDK_APPLICATION_MK=jni/Application.mk
+      - name: Assemble installable module ZIP
+        run: |
+          set -e
+          mkdir -p dist/Spoofing/zygisk
+          cp module.prop system.prop target_apps.txt dist/Spoofing/
+          cp module/libs/arm64-v8a/libspoof.so dist/Spoofing/zygisk/arm64-v8a.so
+          cp README.md dist/Spoofing/
+          cd dist/Spoofing
+          zip -r ../../Spoofer-per-app.zip .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Spoofer-per-app
+          path: dist/Spoofer-per-app.zip
+          if-no-files-found: error
