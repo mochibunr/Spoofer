@@ -57,7 +57,7 @@ jobs:
           cp module/libs/arm64-v8a/libspoof.so dist/Spoofing/zygisk/arm64-v8a.so
           cp README.md dist/Spoofing/
           cd dist/Spoofing
-          zip -r ../../Spoofer-per-app.zip .
+          zip -r ../Spoofer-per-app.zip .
       - uses: actions/upload-artifact@v4
         with:
           name: Spoofer-per-app
