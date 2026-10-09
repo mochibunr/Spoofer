@@ -1,6 +1,6 @@
 id=Spoofing
-name=Fake Devices - Xiaomi 18 Pro Max (CN)
-version=2.3.0
+name=Device Spoof - iPhone 17 Pro Max (A3526)
+version=3.0.0
 versionCode=20261010
 author=Zhameng
-description=Spoofs common Android product and reported SoC properties as Xiaomi 18 Pro Max (CN, M154FF).
+description=Reports common Android product identity and SoC properties as iPhone 17 Pro Max (A3526, iPhone18,2, Apple A19 Pro); does not emulate iOS or change physical hardware.
